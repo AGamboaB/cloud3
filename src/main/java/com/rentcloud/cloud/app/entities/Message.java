@@ -37,12 +37,12 @@ public class Message implements Serializable {
     private String messageText;
 
     @ManyToOne
-    @JoinColumn(name="cloudId")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JoinColumn(name="idCloud")
+    @JsonIgnoreProperties({"messages","client","reservations"})
     private Cloud cloud;
 
     @ManyToOne
-    @JoinColumn(name="clientId")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JoinColumn(name="idClient")
+    @JsonIgnoreProperties({"messages","client", "reservations"})
     private Client client;
 }
