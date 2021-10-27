@@ -45,6 +45,7 @@ public class AdminController {
     /**
      * GET {id}
      * @param adminId
+     * comment
      * @return 
      */
     @GetMapping("/{{id}")
