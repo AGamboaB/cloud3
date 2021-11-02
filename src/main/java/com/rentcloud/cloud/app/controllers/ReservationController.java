@@ -6,6 +6,8 @@
 package com.rentcloud.cloud.app.controllers;
 
 import com.rentcloud.cloud.app.entities.Reservation;
+import com.rentcloud.cloud.app.reports.CountClient;
+import com.rentcloud.cloud.app.reports.ReservationStatus;
 import com.rentcloud.cloud.app.services.ReservationService;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("Reservation")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 
 public class ReservationController {
  @Autowired
@@ -89,5 +92,19 @@ public class ReservationController {
 
    public boolean delete (@PathVariable ("id") int reservationId){
        return service.delete(reservationId);
-   }    
+   } 
+@GetMapping("/report-status")
+    public ReservationStatus getReservationsStatusReport(){
+        return service.getReservationStatusReport();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReservationReportDate(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return service.getReservationPeriod(dateOne,dateTwo);
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getClients(){
+        return service.getTopClients();
+    }   
 }
