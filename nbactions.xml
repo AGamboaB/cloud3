@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.5.0:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath com.rentcloud.cloud.CloudApplication</exec.args>
+                <exec.args>-classpath %classpath com.r1c4.mercaderia.MercaderiaApplication</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
